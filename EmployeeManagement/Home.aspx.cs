@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmployeeManagement.EmpUtilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,15 +13,12 @@ namespace EmployeeManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void PersonalDetails_Click(object sender, EventArgs e)
         {
-            HttpCookie authCookie = Context.Request.Cookies[FormsAuthentication.FormsCookieName];
-            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
-            int userId = int.Parse(ticket.UserData);
-
+                        
             Response.Redirect("PersonalDetails.aspx");
         }
     }

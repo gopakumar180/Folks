@@ -7,7 +7,7 @@
                 <asp:Label ID="Label1" runat="server" Text="Employee No"></asp:Label>
             </asp:TableCell>
             <asp:TableCell>
-                <asp:TextBox ID="EmployeeId" runat="server"></asp:TextBox>
+                <asp:TextBox ID="EmployeeId" runat="server" Enabled="false"></asp:TextBox>
             </asp:TableCell>
         </asp:TableRow>
         <asp:TableRow>
@@ -71,8 +71,19 @@
                 <asp:Label ID="Label10" runat="server" Text="Job Description"></asp:Label>
             </asp:TableCell>
             <asp:TableCell>
-                <asp:TextBox ID="JobDescription" runat="server"></asp:TextBox>
+                <asp:TextBox ID="JobDescription" runat="server" Enabled="false"></asp:TextBox>
             </asp:TableCell>
         </asp:TableRow>
+        <asp:TableRow>
+            <asp:TableCell>
+                 <asp:Label runat="server" Text="Label" ID="Message" ForeColor="Red"></asp:Label>
+            </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow>
+           <asp:TableCell>
+               <asp:Button ID="Update" runat="server" Text="Update" OnClick="Update_Click" />
+           </asp:TableCell>
+        </asp:TableRow>
+       
     </asp:Table>
 </asp:Content>
