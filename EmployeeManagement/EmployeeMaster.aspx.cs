@@ -61,12 +61,12 @@ namespace EmployeeManagement
             if (emp.GetType() == typeof(HourlyEmployee))
             {
                 float hours = ((HourlyEmployee)emp).getHourworked();
-                MessageBox.Show("Hours Worked is "+hours, "", MessageBoxButton.OK, MessageBoxImage.Information);               
+                MessageBox.Show("Hours Worked is " + hours, "", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else if (emp.GetType() == typeof(SalaryEmployee))
             {
                 float salary = ((SalaryEmployee)emp).getMonthlySalary();
-                MessageBox.Show("Salary is " + salary, "", MessageBoxButton.OK, MessageBoxImage.Information);               
+                MessageBox.Show("Salary is " + salary, "", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -79,7 +79,8 @@ namespace EmployeeManagement
                 int id = Convert.ToInt32(EmployeeSearch.Text);
                 //Get thev employee detail using Id
                 Employee emp = empUtil.getEmployeeById(id);
-                if (emp != null) {
+                if (emp != null)
+                {
                     displayEmployee(emp);
                 }
 
@@ -88,9 +89,9 @@ namespace EmployeeManagement
                     System.Windows.MessageBox.Show("Employee number was not found", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch ( KeyNotFoundException)
+            catch (KeyNotFoundException)
             {//catch null pointer exception
-                Response.Write("<script>alert('This Employee number doesn't Exit') </script>");               
+                Response.Write("<script>alert('This Employee number doesn't Exit') </script>");
             }
             catch (NotFiniteNumberException)
             {
@@ -138,7 +139,7 @@ namespace EmployeeManagement
         }
 
         protected void Previous_Click(object sender, EventArgs e)
-        {            
+        {
             Employee emp = empUtil.getPrevious();
             displayEmployee(emp);
         }
@@ -147,17 +148,21 @@ namespace EmployeeManagement
         {
             Employee emp = empUtil.getNext();
             displayEmployee(emp);
-        }
-        protected void Add_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("AddEmployee.aspx");
-
-        }
+        }      
         protected void Delete_Click(object sender, EventArgs e)
         {
-            Employee emp = empUtil.getCurrent();
+            try
+            {
+                Employee emp = empUtil.getCurrent();
+                empUtil.deleteEmployee(emp);
+                MessageBox.Show("Record deleted", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                Response.Redirect("EmployeeMaster.aspx",false);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An Unexpected Error Occured", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
-            empUtil.deleteEmployee(emp);
         }
     }
 }

@@ -34,6 +34,9 @@ namespace EmployeeManagement
                 {
                     var ticket = new FormsAuthenticationTicket(1, UserName.Text, DateTime.Now, DateTime.Now.AddMinutes(60), false, dt.Rows[0].ItemArray[0].ToString());
                     HttpContext.Current.Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(ticket)) { HttpOnly = true });
+                    Application["Name"] = dt.Rows[0]["UserRoleId"].ToString();
+                    //roleName.Value =dt.Rows[0]["UserRoleId"].ToString();
+                    
                     Response.Redirect("Home.aspx",false);
 
                 }
