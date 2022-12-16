@@ -17,6 +17,17 @@
         background: rgba(0,0,0,0.5);    
 }
 
+.form-box {
+    background-color: #d3d3d359;
+    position: absolute;
+    top: 15%;
+    left: 52%;
+    transform: translate(-50%,-50%);
+    min-width: 52%;
+    min-height: 30%;
+    overflow: hidden;
+}
+
 .user {
     width:100px;
     height: 100px;
@@ -36,6 +47,10 @@
     padding-top: 100px;
     padding-left: 10%;
     /*text-align: center;*/
+}
+
+.margin-left-20 {
+    margin-left: 20px;
 }
 
 .loginLabel {
