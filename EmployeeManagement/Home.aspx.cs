@@ -13,24 +13,30 @@ namespace EmployeeManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
-            
+            if (!Page.IsPostBack)
+            {
+                HttpCookie authCookie = Context.Request.Cookies[FormsAuthentication.FormsCookieName];
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                int userId = int.Parse(ticket.UserData);
+                
+            }
+
         }
 
         protected void PersonalDetails_Click(object sender, EventArgs e)
         {
                         
-            Response.Redirect("PersonalDetails.aspx");
+            Response.Redirect("PersonalDetails.aspx",false);
         }
 
         protected void SalaryDetails_Click(object sender, EventArgs e)
         {
-            Response.Redirect("SalaryDetails.aspx");
+            Response.Redirect("SalaryDetails.aspx",false);
         }
 
         protected void EmployeeHome_Click(object sender, EventArgs e)
         {
-            Response.Redirect("EmployeeMaster.aspx");
+            Response.Redirect("EmployeeMaster.aspx", false);
         }
     }
 }

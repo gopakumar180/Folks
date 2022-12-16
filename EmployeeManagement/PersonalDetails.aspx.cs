@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows;
 
 namespace EmployeeManagement
 {
@@ -13,9 +14,7 @@ namespace EmployeeManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack) {
-                Message.Visible=false;
-                Message.EnableViewState = false;
+            if (!Page.IsPostBack) {               
                 try
                 {
 
@@ -40,7 +39,7 @@ namespace EmployeeManagement
                 }
                 catch (Exception ex)
                 {
-                    Message.Text = "Page not loaded properly. Please try again";
+                    System.Windows.MessageBox.Show("An Unexpected Error Occured", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
            
@@ -50,8 +49,7 @@ namespace EmployeeManagement
         {
 
             try
-            {
-                Message.Visible = true;
+            {                
                 PersonViewModel personViewModel = new PersonViewModel();
                 personViewModel.employeeNo = Convert.ToInt32(EmployeeId.Text);
                 personViewModel.lastName = LastName.Text;
@@ -68,16 +66,16 @@ namespace EmployeeManagement
                 bool update = dbConnection.UpdateEmployee(personViewModel);
                 if (update)
                 {
-                    Message.Text = "Successfully Updated";
+                    System.Windows.MessageBox.Show("Successfully Updated", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
-                    Message.Text = "Nothing to Update";
+                    System.Windows.MessageBox.Show("Nothing to update", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch(Exception ex)
             {
-                Message.Text = "Please try after some time";
+                System.Windows.MessageBox.Show("An Unexpected Error Occured", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

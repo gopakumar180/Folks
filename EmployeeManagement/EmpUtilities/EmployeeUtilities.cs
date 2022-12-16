@@ -77,5 +77,10 @@ namespace EmployeeManagement.EmpUtilities
                 employees[i] = (Employee)temp[i];
             }
         }
+        public void deleteEmployee(Employee e)
+        {
+            DbConnection empDB = new DbConnection();
+            empDB.deleteEmployee(e);           
+        }
     }
 }

@@ -15,8 +15,9 @@
             <asp:Label ID="Label1" runat="server" Text="User Name" CssClass="loginLabel" class="form-label"></asp:Label>
             <asp:TextBox ID="UserName" runat="server" CssClass="lognText form-control"></asp:TextBox>
             <asp:Label ID="Label2" runat="server" CssClass="loginLabel"  Text="Password"></asp:Label>
-            <asp:TextBox ID="Password" runat="server" CssClass="lognText form-control"></asp:TextBox>
-            <asp:Button ID="Button1" runat="server" Text="Sign in" CssClass="loginLabel btn btn-primary btn-block mb-4" OnClick="Button1_Click" />
+            <asp:TextBox ID="Password" runat="server" TextMode="Password" CssClass="lognText form-control"></asp:TextBox>
+            <asp:Button ID="LoginBtn" runat="server" Text="Sign in" CssClass="loginLabel btn btn-primary btn-block mb-4" OnClick="LoginBtn_Click" />
+            <span><asp:Literal id="alert" runat="server" /></span>
         </div>
         
 

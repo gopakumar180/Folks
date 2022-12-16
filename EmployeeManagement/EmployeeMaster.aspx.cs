@@ -61,13 +61,12 @@ namespace EmployeeManagement
             if (emp.GetType() == typeof(HourlyEmployee))
             {
                 float hours = ((HourlyEmployee)emp).getHourworked();
-                MessageBox.Show("Employee number was not found", "", MessageBoxButton.OK, MessageBoxImage.Error);
-                Response.Write("<script>alert('Hours Worked is '+" + hours + ")</script>");
+                MessageBox.Show("Hours Worked is "+hours, "", MessageBoxButton.OK, MessageBoxImage.Information);               
             }
             else if (emp.GetType() == typeof(SalaryEmployee))
             {
                 float salary = ((SalaryEmployee)emp).getMonthlySalary();
-                Response.Write("<script>alert('Salary is '+" + salary + ")</script>");
+                MessageBox.Show("Salary is " + salary, "", MessageBoxButton.OK, MessageBoxImage.Information);               
             }
         }
 
@@ -80,48 +79,66 @@ namespace EmployeeManagement
                 int id = Convert.ToInt32(EmployeeSearch.Text);
                 //Get thev employee detail using Id
                 Employee emp = empUtil.getEmployeeById(id);
-                displayEmployee(emp);
+                if (emp != null) {
+                    displayEmployee(emp);
+                }
 
+                else
+                {
+                    System.Windows.MessageBox.Show("Employee number was not found", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             catch ( KeyNotFoundException)
             {//catch null pointer exception
                 Response.Write("<script>alert('This Employee number doesn't Exit') </script>");               
             }
-            catch (FormatException Ex)
-            {//catch number format exception
-                Response.Write("<script>alert('Employee Number must be an Integer') </script>");
+            catch (NotFiniteNumberException)
+            {
+                System.Windows.MessageBox.Show("Employee number shound be in number format", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (Exception Ex)
-            {//catch General exception
-                Response.Write("<script>alert('An unknown error occured') </script>");                
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("An Unexpected Error Occured", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         protected void Save_Click(object sender, EventArgs e)
         {
-            Address a = new Address(Street.Text, City.Text, Province.Text, PostalCode.Text);
+            try
+            {
+                Address a = new Address(Street.Text, City.Text, Province.Text, PostalCode.Text);
 
-            //Initialize employee constructor
-            Employee current = empUtil.getCurrent();
-            Employee emp = null;
-            if (current.GetType() == typeof(SalaryEmployee)) {
-                float monthlySalary = ((SalaryEmployee)current).getMonthlySalary();
-                 emp = new SalaryEmployee(monthlySalary,Convert.ToInt32(EmployeeNo.Text),
-                        JobDescription.Text, LastName.Text, FirstName.Text,
-                        Convert.ToChar(MiddleInitial.Text[0]), PhoneNumber.Text,a);
-            } else if (current.GetType() == typeof(HourlyEmployee)) {
-                float hourlyRate = ((HourlyEmployee)current).getHourlyRate();
-                float hoursWorked = ((HourlyEmployee)current).getHourworked();
-                emp = new HourlyEmployee(hourlyRate, hoursWorked, Convert.ToInt32(EmployeeNo.Text),
-                        JobDescription.Text, LastName.Text, JobDescription.Text,
-                        Convert.ToChar(MiddleInitial.Text[0]), PhoneNumber.Text, a);
+                //Initialize employee constructor
+                Employee current = empUtil.getCurrent();
+                Employee emp = null;
+                if (current.GetType() == typeof(SalaryEmployee))
+                {
+                    float monthlySalary = ((SalaryEmployee)current).getMonthlySalary();
+                    emp = new SalaryEmployee(monthlySalary, Convert.ToInt32(EmployeeNo.Text),
+                           JobDescription.Text, LastName.Text, FirstName.Text,
+                           Convert.ToChar(MiddleInitial.Text[0]), PhoneNumber.Text, a);
+                }
+                else if (current.GetType() == typeof(HourlyEmployee))
+                {
+                    float hourlyRate = ((HourlyEmployee)current).getHourlyRate();
+                    float hoursWorked = ((HourlyEmployee)current).getHourworked();
+                    emp = new HourlyEmployee(hourlyRate, hoursWorked, Convert.ToInt32(EmployeeNo.Text),
+                            JobDescription.Text, LastName.Text, JobDescription.Text,
+                            Convert.ToChar(MiddleInitial.Text[0]), PhoneNumber.Text, a);
+                }
+
+                empUtil.updateEmployee(emp);
+                MessageBox.Show("Successfully Updated", "", MessageBoxButton.OK, MessageBoxImage.Information);
+
             }
-
-            empUtil.updateEmployee(emp);
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("An Unexpected Error Occured", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         protected void Previous_Click(object sender, EventArgs e)
-        {
+        {            
             Employee emp = empUtil.getPrevious();
             displayEmployee(emp);
         }
@@ -130,6 +147,17 @@ namespace EmployeeManagement
         {
             Employee emp = empUtil.getNext();
             displayEmployee(emp);
+        }
+        protected void Add_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AddEmployee.aspx");
+
+        }
+        protected void Delete_Click(object sender, EventArgs e)
+        {
+            Employee emp = empUtil.getCurrent();
+
+            empUtil.deleteEmployee(emp);
         }
     }
 }

@@ -20,7 +20,7 @@
             </div>
         </div>
         <div style="display: flex; align-items: center; margin-left: 73%;">
-            <asp:Button ID="Button1" runat="server" CssClass="loginLabel btn btn-primary mb-4" OnClick="Button1_Click" Text="Get Hours" />
+            <asp:Button ID="GetHours" runat="server" CssClass="loginLabel btn btn-primary mb-4" OnClick="GetHours_Click1" Text="Get Hours" />
         </div>
 
     </div>

@@ -184,5 +184,27 @@ namespace EmployeeManagement.EmpUtilities
 
             }
         }
+        public bool deleteEmployee(Employee e)
+        {
+            SqlConnection conn = GetConnection();
+            SqlCommand cmd = null;
+            if (e.GetType() == typeof(HourlyEmployee))
+            {
+                cmd = new SqlCommand("Delete * from HourlyEMployee where EmployeeID=@id");
+            }
+
+
+            conn.Open();
+            int i = cmd.ExecuteNonQuery();
+            conn.Close();
+            if (i > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

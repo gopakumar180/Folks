@@ -11,6 +11,12 @@
                 <asp:TextBox CssClass="lognText form-control" ID="EmployeeNo" runat="server" Enabled="false"></asp:TextBox>
             </div>
             <div class="col-lg-6">
+                      <asp:TableCell>
+             <asp:Button ID="ADD" CssClass="loginLabel btn btn-secondary mb-4" OnClick="Add_Click" runat="server" Text="ADD" />
+               </asp:TableCell>
+               <asp:TableCell>
+             <asp:Button ID="Delete" CssClass="loginLabel btn btn-danger mb-4" OnClick="Delete_Click" runat="server" Text="Delete" />
+               </asp:TableCell>
             </div>
         </div>
         <%--name--%>

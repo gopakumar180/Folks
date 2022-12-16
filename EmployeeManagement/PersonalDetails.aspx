@@ -73,12 +73,7 @@
             <asp:TableCell>
                 <asp:TextBox ID="JobDescription" runat="server" Enabled="false"></asp:TextBox>
             </asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow>
-            <asp:TableCell>
-                 <asp:Label runat="server" Text="Label" ID="Message" ForeColor="Red"></asp:Label>
-            </asp:TableCell>
-        </asp:TableRow>
+        </asp:TableRow>      
         <asp:TableRow>
            <asp:TableCell>
                <asp:Button ID="Update" runat="server" Text="Update" OnClick="Update_Click" />
