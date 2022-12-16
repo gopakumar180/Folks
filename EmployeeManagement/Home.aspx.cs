@@ -19,7 +19,7 @@ namespace EmployeeManagement
                 string Name = Application["Name"].ToString();
                 if (Name == "1") { 
                     LinkButton3.Visible = true;
-                    HrDiv.Visible = true;
+                    
                 }
                 LinkButton3.EnableViewState = false;
                 

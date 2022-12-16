@@ -17,7 +17,7 @@
             <asp:Label ID="Label2" runat="server" CssClass="loginLabel"  Text="Password"></asp:Label>
             <asp:TextBox ID="Password" runat="server" TextMode="Password" CssClass="lognText form-control"></asp:TextBox>
             <asp:Button ID="LoginBtn" runat="server" Text="Sign in" CssClass="loginLabel btn btn-primary btn-block mb-4" OnClick="LoginBtn_Click" />
-            <span><asp:Literal id="alert" runat="server" /></span>
+            <span style="color:red"><asp:Literal id="alert" runat="server" /></span>
         </div>
         
 

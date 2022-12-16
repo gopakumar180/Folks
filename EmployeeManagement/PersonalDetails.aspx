@@ -25,7 +25,7 @@
         <%--first and last--%>
         <div class="row margin-left-20">
             <div class="col-lg-6">
-                <asp:Label CssClass="loginLabel" class="form-label" ID="Label4" runat="server" Text="First Name"></asp:Label>
+                <asp:Label CssClass="loginLabel" class=" loginLabel form-label" ID="Label4" runat="server" Text="First Name"></asp:Label>
                 <asp:TextBox CssClass="lognText form-control" ID="FirstName" runat="server" Enabled="false"></asp:TextBox>
             </div>
             <div class="col-lg-6">
@@ -49,7 +49,7 @@
         <%-- phone and city --%>
         <div class="row margin-left-20">
             <div class="col-lg-6">
-                  <asp:Label ID="Label8" runat="server" Text="Phone Number"></asp:Label>
+                  <asp:Label ID="Label8" CssClass="loginLabel" runat="server" Text="Phone Number"></asp:Label>
                 <asp:TextBox ID="PhoneNumber"  CssClass="lognText form-control" runat="server"></asp:TextBox>
             </div>
             <div class="col-lg-6">

@@ -11,23 +11,22 @@
                 <asp:TextBox CssClass="lognText form-control" ID="EmployeeNo" runat="server" Enabled="false"></asp:TextBox>
             </div>
             <div class="col-lg-6">
-                      <asp:TableCell>
-             <asp:Button ID="ADD" CssClass="loginLabel btn btn-secondary mb-4" OnClick="Add_Click" runat="server" Text="ADD" />
-               </asp:TableCell>
-               <asp:TableCell>
+                      
+             
+              
              <asp:Button ID="Delete" CssClass="loginLabel btn btn-danger mb-4" OnClick="Delete_Click" runat="server" Text="Delete" />
-               </asp:TableCell>
+              
             </div>
         </div>
         <%--name--%>
         <div class="row margin-left-20">
             <div class="col-lg-6">
                 <asp:Label CssClass="loginLabel" ID="Label4" runat="server" Text="First Name"></asp:Label>
-                <asp:TextBox CssClass="lognText" ID="FirstName" runat="server"></asp:TextBox>
+                <asp:TextBox CssClass="lognText form-control" ID="FirstName" runat="server"></asp:TextBox>
             </div>
             <div class="col-lg-6">
                 <asp:Label CssClass="loginLabel" class="form-label" ID="Label11" runat="server" Text="Last Name"></asp:Label>
-                <asp:TextBox CssClass="lognText" ID="LastName" runat="server"></asp:TextBox>
+                <asp:TextBox CssClass="lognText form-control" ID="LastName" runat="server"></asp:TextBox>
             </div>
         </div>
 
@@ -35,11 +34,11 @@
         <div class="row margin-left-20">
             <div class="col-lg-6">
                 <asp:Label CssClass="loginLabel" ID="Label2" runat="server" Text="Middle Name"></asp:Label>
-                <asp:TextBox CssClass="lognText" ID="MiddleInitial" runat="server"></asp:TextBox>
+                <asp:TextBox CssClass="lognText form-control" ID="MiddleInitial" runat="server"></asp:TextBox>
             </div>
             <div class="col-lg-6">
                 <asp:Label CssClass="loginLabel" class="form-label" ID="Label3" runat="server" Text="Street"></asp:Label>
-                <asp:TextBox CssClass="lognText" ID="Street" runat="server"></asp:TextBox>
+                <asp:TextBox CssClass="lognText form-control" ID="Street" runat="server"></asp:TextBox>
             </div>
         </div>
 
@@ -47,33 +46,33 @@
         <div class="row margin-left-20">
             <div class="col-lg-6">
                 <asp:Label CssClass="loginLabel" ID="Label5" runat="server" Text="City"></asp:Label>
-                <asp:TextBox ID="City" runat="server"></asp:TextBox>
+                <asp:TextBox CssClass="lognText form-control" ID="City" runat="server"></asp:TextBox>
             </div>
             <div class="col-lg-6">
                 <asp:Label CssClass="loginLabel" class="form-label" ID="Label7" runat="server" Text="Province"></asp:Label>
-                <asp:TextBox CssClass="lognText" ID="Province" runat="server"></asp:TextBox>
+                <asp:TextBox CssClass="lognText form-control" ID="Province" runat="server"></asp:TextBox>
             </div>
         </div>
         <%--Phone  and  Postal Code --%>
         <div class="row margin-left-20">
             <div class="col-lg-6">
                 <asp:Label CssClass="loginLabel" ID="Label8" runat="server" Text="Phone Number"></asp:Label>
-                <asp:TextBox ID="PhoneNumber" runat="server"></asp:TextBox>
+                <asp:TextBox CssClass="lognText form-control" ID="PhoneNumber" runat="server"></asp:TextBox>
             </div>
             <div class="col-lg-6">
                 <asp:Label CssClass="loginLabel" class="form-label" ID="Label9" runat="server" Text="Postal Code"></asp:Label>
-                <asp:TextBox CssClass="lognText" ID="PostalCode" runat="server"></asp:TextBox>
+                <asp:TextBox CssClass="lognText form-control" ID="PostalCode" runat="server"></asp:TextBox>
             </div>
         </div>
         <%-- Job  Des --%>
         <div class="row margin-left-20">
             <div class="col-lg-6">
                 <asp:Label CssClass="loginLabel" ID="Label10" runat="server" Text="Job Description"></asp:Label>
-                <asp:TextBox ID="JobDescription" runat="server"></asp:TextBox>
+                <asp:TextBox CssClass="lognText form-control" ID="JobDescription" runat="server"></asp:TextBox>
             </div>
             <div class="col-lg-6">
                 <asp:Label CssClass="loginLabel" ID="Label1" runat="server" Text="Earnings"></asp:Label>
-                <asp:TextBox ID="Earnings" runat="server"></asp:TextBox>
+                <asp:TextBox CssClass="lognText form-control" ID="Earnings" runat="server"></asp:TextBox>
             </div>
 
         </div>
@@ -93,7 +92,7 @@
         <div class="row margin-left-20" style=" margin-bottom: 15px;">
             <div class="col-lg-6">
                 <asp:Label CssClass="loginLabel" runat="server" Text="Employee No"></asp:Label>
-                <asp:TextBox ID="EmployeeSearch" runat="server"></asp:TextBox>
+                <asp:TextBox CssClass="lognText form-control" ID="EmployeeSearch" runat="server"></asp:TextBox>
             </div>
             <div class="col-lg-6">
                 <asp:Button ID="Button1" CssClass="loginLabel btn btn-primary mb-4" OnClick="Search_Click" runat="server" Text="Search" />
