@@ -84,7 +84,7 @@
             </div>
         </div>
         <%--search--%>
-        <div class="row margin-left-20">
+        <div class="row margin-left-20" style=" margin-bottom: 15px;">
             <div class="col-lg-6">
                 <asp:Label CssClass="loginLabel" runat="server" Text="Employee No"></asp:Label>
                 <asp:TextBox ID="EmployeeSearch" runat="server"></asp:TextBox>
