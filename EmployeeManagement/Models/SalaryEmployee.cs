@@ -58,5 +58,8 @@ namespace EmployeeManagement
             this.setMonthlySalary(monthlySalary);
         }
 
+        public SalaryEmployee()
+        {
+        }
     }
 }

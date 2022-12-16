@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -37,12 +38,12 @@ namespace EmployeeManagement.EmpUtilities
             SqlConnection conn = GetConnection();
             SqlCommand cmd = new SqlCommand("select * from UserLogin where UserId=@id", conn);
             cmd.Parameters.AddWithValue("id", id);
-            SqlDataAdapter sda= new SqlDataAdapter(cmd);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
             conn.Open();
             //Address address = new Address(dt.Rows[0]["Street"].ToString(), dt.Rows[0]["City"].ToString(), dt.Rows[0]["Province"].ToString(), dt.Rows[0]["PostalCode"].ToString());
-            PersonViewModel emp = new PersonViewModel(Convert.ToInt32(dt.Rows[0]["UserId"]), dt.Rows[0]["LastName"].ToString(), dt.Rows[0]["Street"].ToString(), dt.Rows[0]["FirstName"].ToString(), dt.Rows[0]["City"].ToString(),dt.Rows[0]["MiddleInt"].ToString(), dt.Rows[0]["Province"].ToString(), dt.Rows[0]["PhoneNumber"].ToString(), dt.Rows[0]["PostalCode"].ToString(), dt.Rows[0]["JobDescription"].ToString());
+            PersonViewModel emp = new PersonViewModel(Convert.ToInt32(dt.Rows[0]["UserId"]), dt.Rows[0]["LastName"].ToString(), dt.Rows[0]["Street"].ToString(), dt.Rows[0]["FirstName"].ToString(), dt.Rows[0]["City"].ToString(), dt.Rows[0]["MiddleInt"].ToString(), dt.Rows[0]["Province"].ToString(), dt.Rows[0]["PhoneNumber"].ToString(), dt.Rows[0]["PostalCode"].ToString(), dt.Rows[0]["JobDescription"].ToString());
             conn.Close();
             return emp;
         }
@@ -60,7 +61,8 @@ namespace EmployeeManagement.EmpUtilities
             cmd.Parameters.AddWithValue("@pcode", personViewModel.postalCode);
             cmd.Parameters.AddWithValue("@uid", personViewModel.employeeNo);
             conn.Open();
-            int i=cmd.ExecuteNonQuery();
+            int i = cmd.ExecuteNonQuery();
+            conn.Close();
             if (i > 0)
             {
                 return true;
@@ -69,6 +71,63 @@ namespace EmployeeManagement.EmpUtilities
             {
                 return false;
             }
+        }
+        public ArrayList GetEmployeeSalary(int id)
+        {
+            ArrayList employees = new ArrayList();
+            SqlConnection conn = GetConnection();
+            SqlCommand cmd = new SqlCommand(" select UserId,MonthlySalary,HourlyRate,HoursWorked,UserType,JobDescription from UserLogin left join [SalaryEmployee] on SalaryEmployee.EmployeeID=UserId left join HourlyEmployee on HourlyEmployee.EmployeeID=UserId where UserId=@id", conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            conn.Open();
+            SalaryEmployee emp = new SalaryEmployee();
+            HourlyEmployee empHourly = new HourlyEmployee();
+            if (Convert.ToInt32(dt.Rows[0]["UserType"]) == 2)
+            {
+                emp = new SalaryEmployee(float.Parse(dt.Rows[0]["MonthlySalary"].ToString()), Convert.ToInt32(dt.Rows[0]["UserId"].ToString()), dt.Rows[0]["JobDescription"].ToString());
+                employees.Add(emp);
+            }
+            else if (Convert.ToInt32(dt.Rows[0]["UserType"]) == 1)
+            {
+                empHourly = new HourlyEmployee(float.Parse(dt.Rows[0]["HourlyRate"].ToString()), float.Parse(dt.Rows[0]["HoursWorked"].ToString()), Convert.ToInt32(dt.Rows[0]["UserId"].ToString()), dt.Rows[0]["JobDescription"].ToString());
+                employees.Add(empHourly);
+            }
+            return employees;
+        }
+        public ArrayList GetEmployeeList()
+        {
+            ArrayList employees = new ArrayList();
+            SqlConnection conn = GetConnection();
+            SqlCommand cmd = new SqlCommand(" select * from UserLogin left join [SalaryEmployee] on SalaryEmployee.EmployeeID=UserId left join HourlyEmployee on HourlyEmployee.EmployeeID=UserId", conn);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            conn.Open();
+            
+            for (int i=0;i<dt.Rows.Count;i++)
+            {
+                Address address = new Address(dt.Rows[i]["Street"].ToString(), dt.Rows[i]["City"].ToString(),
+                    dt.Rows[i]["Province"].ToString(), dt.Rows[i]["PostalCode"].ToString());
+                if (Convert.ToInt32(dt.Rows[i]["UserType"]) == 2)
+                {                   
+                    SalaryEmployee emp = new SalaryEmployee(float.Parse(dt.Rows[i]["MonthlySalary"].ToString()), Convert.ToInt32(dt.Rows[i]["UserId"]),
+                            dt.Rows[i]["JobDescription"].ToString(), dt.Rows[i]["LastName"].ToString(), dt.Rows[i]["FirstName"].ToString(),
+                            Convert.ToChar(dt.Rows[i]["MiddleInt"].ToString()[0]), dt.Rows[i]["PhoneNumber"].ToString(), address);
+                    employees.Add(emp);
+                }
+                else if (Convert.ToInt32(dt.Rows[i]["UserType"]) == 1)
+                {
+                   HourlyEmployee empHourly = new HourlyEmployee(float.Parse(dt.Rows[i]["HourlyRate"].ToString()), float.Parse(dt.Rows[i]["HoursWorked"].ToString()), Convert.ToInt32(dt.Rows[i]["UserId"]),
+                            dt.Rows[i]["JobDescription"].ToString(), dt.Rows[i]["LastName"].ToString(), dt.Rows[i]["FirstName"].ToString(),
+                            Convert.ToChar(dt.Rows[i]["MiddleInt"].ToString()[0]), dt.Rows[0]["PhoneNumber"].ToString(), address);
+                    employees.Add(empHourly);
+                }
+            }
+
+
+            return employees;
         }
     }
 }

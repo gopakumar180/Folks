@@ -11,43 +11,52 @@ namespace EmployeeManagement
 {
 
 
-    public partial class Home
+    public partial class SalaryDetails
     {
 
         /// <summary>
-        /// Table1 control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table Table1;
+        protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// SalaryDetails control.
+        /// EmployeeNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton SalaryDetails;
+        protected global::System.Web.UI.WebControls.TextBox EmployeeNo;
 
         /// <summary>
-        /// PersonalDetails control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton PersonalDetails;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// EmployeeHome control.
+        /// Earnings control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton EmployeeHome;
+        protected global::System.Web.UI.WebControls.TextBox Earnings;
+
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
     }
 }

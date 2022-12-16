@@ -21,5 +21,15 @@ namespace EmployeeManagement
                         
             Response.Redirect("PersonalDetails.aspx");
         }
+
+        protected void SalaryDetails_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("SalaryDetails.aspx");
+        }
+
+        protected void EmployeeHome_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("EmployeeMaster.aspx");
+        }
     }
 }
