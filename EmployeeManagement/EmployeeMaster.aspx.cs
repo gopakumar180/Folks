@@ -96,7 +96,25 @@ namespace EmployeeManagement
 
         protected void Save_Click(object sender, EventArgs e)
         {
+            //Address a = new Address(Street.Text, City.Text, Province.Text, PostalCode.Text);
 
+            ////Initialize employee constructor
+            //Employee current = empUtil.getCurrent();
+            //Employee emp = null;
+            //if (emp.GetType() == typeof(HourlyEmployee)) {
+            //    float monthlySalary = ((SalaryEmployee)current).getMonthlySalary();
+            //    e = new SalaryEmployee(monthlySalary,Convert.ToInt32(EmployeeNo.Text),
+            //            JobDescription.Text,Name, this.jTextFName.getText(),
+            //            this.jTextMiddileInit.getText().charAt(0), jTextPhone.getText(), a);
+            //} else if (current instanceof HourlyEmployee) {
+            //    float hourlyRate = ((HourlyEmployee)current).getHourlyRate();
+            //    float hoursWorked = ((HourlyEmployee)current).getHoursWorked();
+            //    e = new HourlyEmployee(hourlyRate, hoursWorked, Integer.parseInt(this.jTextEmpNo.getText()),
+            //            this.jTextJobDescription.getText(), this.jTextLName.getText(), this.jTextFName.getText(),
+            //            this.jTextMiddileInit.getText().charAt(0), jTextPhone.getText(), a);
+            //}
+
+            //empUtil.updateEmployee(e);
         }
 
         protected void Previous_Click(object sender, EventArgs e)
