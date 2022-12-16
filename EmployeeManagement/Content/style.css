@@ -1,0 +1,73 @@
+﻿body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background-size: cover !important;
+    font-family: sans-serif !important;
+}
+
+.loginbox {
+    position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        width: 350px;
+        height: 420px;
+        padding: 80px, 40px;
+        box-sizing: border-box;
+        background: rgba(0,0,0,0.5);    
+}
+
+.user {
+    width:100px;
+    height: 100px;
+    overflow: hidden;
+    top: calc(-100px/2);
+    left:38%;
+    position: absolute;
+}
+.login-title {
+    padding:75px;
+    margin: 0px;
+    text-align: center;
+    color: yellow;
+}
+
+.padding-top-10 {
+    padding-top: 100px;
+    padding-left: 10%;
+    /*text-align: center;*/
+}
+
+.loginLabel {
+    font-weight: bold;
+    color: #fff;
+}
+
+.lognText {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center !important;
+}
+
+img {
+    border-radius: 50%;
+}
+
+.card {  
+    margin-top: 70px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 20%;
+    display:inline-block;
+
+    background-color: aliceblue;
+}
+
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+.container {
+    padding: 2px 16px;
+}
+
