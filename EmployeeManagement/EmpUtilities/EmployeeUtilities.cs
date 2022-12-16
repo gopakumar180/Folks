@@ -61,7 +61,8 @@ namespace EmployeeManagement.EmpUtilities
         }
         public void updateEmployee(Employee e)
         {
-            employees[current] = e;
+            DbConnection empDB = new DbConnection();
+            empDB.updateEmployee(e);
         }
         public void getDataFromDB()
         {

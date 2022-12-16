@@ -105,13 +105,13 @@ namespace EmployeeManagement.EmpUtilities
             DataTable dt = new DataTable();
             sda.Fill(dt);
             conn.Open();
-            
-            for (int i=0;i<dt.Rows.Count;i++)
+
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
                 Address address = new Address(dt.Rows[i]["Street"].ToString(), dt.Rows[i]["City"].ToString(),
                     dt.Rows[i]["Province"].ToString(), dt.Rows[i]["PostalCode"].ToString());
                 if (Convert.ToInt32(dt.Rows[i]["UserType"]) == 2)
-                {                   
+                {
                     SalaryEmployee emp = new SalaryEmployee(float.Parse(dt.Rows[i]["MonthlySalary"].ToString()), Convert.ToInt32(dt.Rows[i]["UserId"]),
                             dt.Rows[i]["JobDescription"].ToString(), dt.Rows[i]["LastName"].ToString(), dt.Rows[i]["FirstName"].ToString(),
                             Convert.ToChar(dt.Rows[i]["MiddleInt"].ToString()[0]), dt.Rows[i]["PhoneNumber"].ToString(), address);
@@ -119,15 +119,70 @@ namespace EmployeeManagement.EmpUtilities
                 }
                 else if (Convert.ToInt32(dt.Rows[i]["UserType"]) == 1)
                 {
-                   HourlyEmployee empHourly = new HourlyEmployee(float.Parse(dt.Rows[i]["HourlyRate"].ToString()), float.Parse(dt.Rows[i]["HoursWorked"].ToString()), Convert.ToInt32(dt.Rows[i]["UserId"]),
-                            dt.Rows[i]["JobDescription"].ToString(), dt.Rows[i]["LastName"].ToString(), dt.Rows[i]["FirstName"].ToString(),
-                            Convert.ToChar(dt.Rows[i]["MiddleInt"].ToString()[0]), dt.Rows[0]["PhoneNumber"].ToString(), address);
+                    HourlyEmployee empHourly = new HourlyEmployee(float.Parse(dt.Rows[i]["HourlyRate"].ToString()), float.Parse(dt.Rows[i]["HoursWorked"].ToString()), Convert.ToInt32(dt.Rows[i]["UserId"]),
+                             dt.Rows[i]["JobDescription"].ToString(), dt.Rows[i]["LastName"].ToString(), dt.Rows[i]["FirstName"].ToString(),
+                             Convert.ToChar(dt.Rows[i]["MiddleInt"].ToString()[0]), dt.Rows[0]["PhoneNumber"].ToString(), address);
                     employees.Add(empHourly);
                 }
             }
 
 
             return employees;
+        }
+        public void updateEmployee(Employee e)
+        {
+            SqlConnection conn = GetConnection();
+            Address a = e.getAddress();
+            try
+            {
+                //create statement using connection object
+                SqlCommand cmd = new SqlCommand("UPDATE UserLogin SET LastName = @lastName, FirstName = @firstName, MiddleInt= @middleInt, PhoneNumber= @phoneNo, Street= @street, City = @city, Province = @province, PostalCode = @pcode, JobDescription = @jobdescription Where UserId = @uid", conn);
+
+
+
+                cmd.Parameters.AddWithValue("@lastName", e.getLastName());
+                cmd.Parameters.AddWithValue("@firstName", e.getFirstName());
+                cmd.Parameters.AddWithValue("@middleInt", e.getMiddleinit());
+                cmd.Parameters.AddWithValue("@phoneNo", e.getPhoneNumber());
+                cmd.Parameters.AddWithValue("@street", e.getAddress().getStreet());
+                cmd.Parameters.AddWithValue("@city", e.getAddress().getCity());
+                cmd.Parameters.AddWithValue("@province", e.getAddress().getProvince());
+                cmd.Parameters.AddWithValue("@pcode", e.getAddress().getPostalcode());
+                cmd.Parameters.AddWithValue("@jobdescription", e.getJobDescription());
+                cmd.Parameters.AddWithValue("@uid", e.getEmployeeNo());
+                conn.Open();
+                int i = cmd.ExecuteNonQuery();
+
+
+
+                //check the empployee is hourlyemployee or Salary employeee
+                if (e.GetType() == typeof(HourlyEmployee))
+                {
+                    HourlyEmployee h = (HourlyEmployee)e;
+                    //update  hoursWorked and hourlyRate of HourlyEmployee
+                    cmd = new SqlCommand("Update [HourlyEmployee] set HoursWorked= @hoursWorked,HourlyRate=@hourlyRate where EmployeeId =@empId",conn);
+                    cmd.Parameters.AddWithValue("@hoursWorked", h.getHourworked());
+                    cmd.Parameters.AddWithValue("@hourlyRate", h.getHourlyRate());
+                    cmd.Parameters.AddWithValue("@empId", h.getEmployeeNo());
+
+                    int y = cmd.ExecuteNonQuery();
+
+                }
+                else if (e.GetType() == typeof(SalaryEmployee))
+                {
+                    SalaryEmployee s = (SalaryEmployee)e;
+
+                    cmd = new SqlCommand("Update [SalaryEmployee] set MonthlySalary= @monthlySalary where EmployeeID =@empId",conn);
+                    cmd.Parameters.AddWithValue("@monthlySalary", s.getMonthlySalary());
+                    cmd.Parameters.AddWithValue("@empId", s.getEmployeeNo());
+                    int x = cmd.ExecuteNonQuery();
+                }
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

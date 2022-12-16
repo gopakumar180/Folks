@@ -6,18 +6,19 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows;
 
 namespace EmployeeManagement
 {
     public partial class EmployeeMaster : System.Web.UI.Page
     {
-        private EmployeeUtilities empUtil;
+        private static EmployeeUtilities empUtil;
 
-        public EmployeeMaster()
-        {
-            empUtil = new EmployeeUtilities(); //create object of EmployeeUtilities                                              
+        //public EmployeeMaster()
+        //{
+        //    empUtil = new EmployeeUtilities(); //create object of EmployeeUtilities                                              
 
-        }
+        //}
         public void displayEmployee(Employee e)
         {
             EmployeeNo.Text = Convert.ToString(e.getEmployeeNo());
@@ -48,6 +49,7 @@ namespace EmployeeManagement
         {
             if (!Page.IsPostBack)
             {
+                empUtil = new EmployeeUtilities();
                 Employee emp = empUtil.getCurrent(); //get current employee details first               
                 displayEmployee(emp); //calling displayEmployee method to display current employee details
             }
@@ -59,6 +61,7 @@ namespace EmployeeManagement
             if (emp.GetType() == typeof(HourlyEmployee))
             {
                 float hours = ((HourlyEmployee)emp).getHourworked();
+                MessageBox.Show("Employee number was not found", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 Response.Write("<script>alert('Hours Worked is '+" + hours + ")</script>");
             }
             else if (emp.GetType() == typeof(SalaryEmployee))
@@ -96,25 +99,25 @@ namespace EmployeeManagement
 
         protected void Save_Click(object sender, EventArgs e)
         {
-            //Address a = new Address(Street.Text, City.Text, Province.Text, PostalCode.Text);
+            Address a = new Address(Street.Text, City.Text, Province.Text, PostalCode.Text);
 
-            ////Initialize employee constructor
-            //Employee current = empUtil.getCurrent();
-            //Employee emp = null;
-            //if (emp.GetType() == typeof(HourlyEmployee)) {
-            //    float monthlySalary = ((SalaryEmployee)current).getMonthlySalary();
-            //    e = new SalaryEmployee(monthlySalary,Convert.ToInt32(EmployeeNo.Text),
-            //            JobDescription.Text,Name, this.jTextFName.getText(),
-            //            this.jTextMiddileInit.getText().charAt(0), jTextPhone.getText(), a);
-            //} else if (current instanceof HourlyEmployee) {
-            //    float hourlyRate = ((HourlyEmployee)current).getHourlyRate();
-            //    float hoursWorked = ((HourlyEmployee)current).getHoursWorked();
-            //    e = new HourlyEmployee(hourlyRate, hoursWorked, Integer.parseInt(this.jTextEmpNo.getText()),
-            //            this.jTextJobDescription.getText(), this.jTextLName.getText(), this.jTextFName.getText(),
-            //            this.jTextMiddileInit.getText().charAt(0), jTextPhone.getText(), a);
-            //}
+            //Initialize employee constructor
+            Employee current = empUtil.getCurrent();
+            Employee emp = null;
+            if (current.GetType() == typeof(SalaryEmployee)) {
+                float monthlySalary = ((SalaryEmployee)current).getMonthlySalary();
+                 emp = new SalaryEmployee(monthlySalary,Convert.ToInt32(EmployeeNo.Text),
+                        JobDescription.Text, LastName.Text, FirstName.Text,
+                        Convert.ToChar(MiddleInitial.Text[0]), PhoneNumber.Text,a);
+            } else if (current.GetType() == typeof(HourlyEmployee)) {
+                float hourlyRate = ((HourlyEmployee)current).getHourlyRate();
+                float hoursWorked = ((HourlyEmployee)current).getHourworked();
+                emp = new HourlyEmployee(hourlyRate, hoursWorked, Convert.ToInt32(EmployeeNo.Text),
+                        JobDescription.Text, LastName.Text, JobDescription.Text,
+                        Convert.ToChar(MiddleInitial.Text[0]), PhoneNumber.Text, a);
+            }
 
-            //empUtil.updateEmployee(e);
+            empUtil.updateEmployee(emp);
         }
 
         protected void Previous_Click(object sender, EventArgs e)
