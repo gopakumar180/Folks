@@ -13,11 +13,15 @@ namespace EmployeeManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!Page.IsPostBack)
             {
-                HttpCookie authCookie = Context.Request.Cookies[FormsAuthentication.FormsCookieName];
-                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
-                int userId = int.Parse(ticket.UserData);
+                string Name = Application["Name"].ToString();
+                if (Name == "1") { 
+                    LinkButton3.Visible = true;
+                    HrDiv.Visible = true;
+                }
+                LinkButton3.EnableViewState = false;
                 
             }
 
@@ -25,13 +29,13 @@ namespace EmployeeManagement
 
         protected void PersonalDetails_Click(object sender, EventArgs e)
         {
-                        
-            Response.Redirect("PersonalDetails.aspx",false);
+
+            Response.Redirect("PersonalDetails.aspx", false);
         }
 
         protected void SalaryDetails_Click(object sender, EventArgs e)
         {
-            Response.Redirect("SalaryDetails.aspx",false);
+            Response.Redirect("SalaryDetails.aspx", false);
         }
 
         protected void EmployeeHome_Click(object sender, EventArgs e)

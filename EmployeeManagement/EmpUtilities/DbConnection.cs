@@ -190,21 +190,33 @@ namespace EmployeeManagement.EmpUtilities
             SqlCommand cmd = null;
             if (e.GetType() == typeof(HourlyEmployee))
             {
-                cmd = new SqlCommand("Delete * from HourlyEMployee where EmployeeID=@id");
+                cmd = new SqlCommand("Delete  from [HourlyEmployee] where EmployeeID=@id",conn);
+                cmd.Parameters.AddWithValue("@id", e.getEmployeeNo());
+               
             }
-
+            else if(e.GetType()==typeof(SalaryEmployee))
+            {
+                cmd = new SqlCommand("Delete from [SalaryEmployee] where EmployeeID=@id", conn);
+                cmd.Parameters.AddWithValue("@id", e.getEmployeeNo());
+            }
 
             conn.Open();
             int i = cmd.ExecuteNonQuery();
             conn.Close();
             if (i > 0)
             {
+                cmd = new SqlCommand("Delete from [UserLogin] where UserId=@id", conn);
+                cmd.Parameters.AddWithValue("@id", e.getEmployeeNo());
+                conn.Open();
+                int y = cmd.ExecuteNonQuery();
+                conn.Close();
+
                 return true;
             }
             else
             {
                 return false;
             }
-        }
+        }       
     }
 }
