@@ -97,6 +97,7 @@
             <div class="col-lg-6">
                 <asp:Button ID="Button1" CssClass="loginLabel btn btn-primary mb-4" OnClick="Search_Click" runat="server" Text="Search" />
                 <asp:Button ID="Save" CssClass="loginLabel btn btn-danger mb-4" OnClick="Save_Click" runat="server" Text="Save" />
+                <asp:Button ID="timesheet" runat="server" CssClass="loginLabel btn btn-primary mb-4" Text="Timesheet" OnClick="TimeSheet_Click" />
             </div>
 
         </div>

@@ -54,7 +54,11 @@ namespace EmployeeManagement
                 displayEmployee(emp); //calling displayEmployee method to display current employee details
             }
         }
+        protected void TimeSheet_Click(object sender, EventArgs e)
+        {
 
+            Response.Redirect("TimeSheet.aspx");
+        }
         protected void GetHours_Click(object sender, EventArgs e)
         {
             Employee emp = empUtil.getCurrent();
